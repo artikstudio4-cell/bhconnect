@@ -1,0 +1,869 @@
+/* ============================================
+   STYLE PROFESSIONNEL - SOBRE & FLUIDE
+   Couleur principale : Blanc pur
+   ============================================ */
+
+/* Variables CSS - Palette sobre et professionnelle */
+:root {
+    /* Couleurs principales */
+    --white: #FFFFFF;
+    --white-soft: #F8F9FA;
+    --white-warm: #FCFCFC;
+
+    /* Gris subtils - Bordures et séparateurs */
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-400: #9CA3AF;
+    --gray-500: #6B7280;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+
+    /* Couleurs d'accent - Modernes et accessibles */
+    --primary: #2563EB;
+    /* Bleu royal plus vibrant */
+    --primary-hover: #1D4ED8;
+    --accent: #0EA5E9;
+    /* Bleu ciel lumineux */
+    --accent-hover: #0284C7;
+    --success: #10B981;
+    /* Vert émeraude */
+    --warning: #F59E0B;
+    /* Ambre */
+    --danger: #EF4444;
+    /* Rouge vif */
+    --info: #64748B;
+    /* Bleu-gris */
+
+    /* Ombres professionnelles (douces et diffusées) */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Transitions fluides */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Espacements */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2.5rem;
+    --spacing-xxl: 4rem;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--white);
+    color: var(--gray-900);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   NAVBAR - Professionnelle et sobre
+   ============================================ */
+
+.navbar {
+    background-color: var(--white) !important;
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-md) 0;
+    transition: all var(--transition-base);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--primary) !important;
+    letter-spacing: -0.02em;
+}
+
+.navbar-brand:hover {
+    color: var(--primary-hover) !important;
+}
+
+.nav-link {
+    color: var(--gray-700) !important;
+    font-weight: 500;
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    border-radius: 6px;
+    transition: all var(--transition-fast);
+    margin: 0 var(--spacing-xs);
+}
+
+.nav-link:hover {
+    background-color: var(--gray-50);
+    color: var(--primary) !important;
+}
+
+.nav-link.active {
+    background-color: var(--gray-100);
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+/* Badge de notification dans navbar */
+.nav-link .badge {
+    font-size: 0.7rem;
+    padding: 0.2em 0.5em;
+    font-weight: 600;
+}
+
+/* Dropdown notifications */
+.dropdown-menu {
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+    border-radius: 8px;
+    padding: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+.dropdown-item {
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    transition: all var(--transition-fast);
+}
+
+.dropdown-item:hover {
+    background-color: var(--gray-50);
+}
+
+.notification-item-unread {
+    background-color: var(--gray-50);
+    border-left: 3px solid var(--accent);
+}
+
+/* ============================================
+   CARDS - Épurées et professionnelles
+   ============================================ */
+
+.card {
+    background-color: var(--white);
+    border: none;
+    /* Plus de bordure par défaut pour un look plus clean */
+    border-radius: 12px;
+    /* Coins un peu plus arrondis */
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    /* Ombre plus marquée au survol */
+    transform: translateY(-2px);
+    /* Légère élévation */
+}
+
+.card-header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-weight: 600;
+    color: var(--gray-900);
+    font-size: 1rem;
+}
+
+.card-body {
+    padding: var(--spacing-lg);
+}
+
+.card-footer {
+    background-color: var(--white);
+    border-top: 1px solid var(--gray-200);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+/* Stat cards */
+.stat-card {
+    border: none;
+    background-color: var(--white);
+    border-left: 4px solid;
+}
+
+.stat-card.bg-primary {
+    border-left-color: var(--primary);
+    background-color: var(--white);
+}
+
+.stat-card.bg-info {
+    border-left-color: var(--accent);
+    background-color: var(--white);
+}
+
+.stat-card.bg-success {
+    border-left-color: var(--success);
+    background-color: var(--white);
+}
+
+.stat-card.bg-warning {
+    border-left-color: var(--warning);
+    background-color: var(--white);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.stat-card.bg-primary .stat-icon {
+    background-color: var(--gray-100);
+    color: var(--primary);
+}
+
+.stat-card.bg-info .stat-icon {
+    background-color: var(--gray-100);
+    color: var(--accent);
+}
+
+.stat-card.bg-success .stat-icon {
+    background-color: var(--gray-100);
+    color: var(--success);
+}
+
+/* ============================================
+   BOUTONS - Sobres et professionnels
+   ============================================ */
+
+.btn {
+    border-radius: 8px;
+    /* Coins plus arrondis */
+    font-weight: 600;
+    /* Texte un peu plus gras */
+    padding: 0.625rem 1.25rem;
+    /* Padding ajusté */
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+    font-size: 0.9375rem;
+    letter-spacing: 0.01em;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--white);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-secondary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline-secondary {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: var(--white);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+.btn-success {
+    background-color: var(--success);
+    border-color: var(--success);
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background-color: #229954;
+    border-color: #229954;
+    color: var(--white);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    border-color: var(--danger);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background-color: #C0392B;
+    border-color: #C0392B;
+    color: var(--white);
+}
+
+.btn-sm {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.875rem;
+}
+
+.btn-lg {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1rem;
+}
+
+/* ============================================
+   FORMULAIRES - Épurés
+   ============================================ */
+
+.form-control,
+.form-select {
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    transition: all var(--transition-fast);
+    background-color: var(--white);
+    color: var(--gray-900);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--gray-400);
+}
+
+.input-group-text {
+    background-color: var(--gray-50);
+    border: 1px solid var(--gray-300);
+    color: var(--gray-700);
+}
+
+/* ============================================
+   TABLES - Professionnelles
+   ============================================ */
+
+.table {
+    background-color: var(--white);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead {
+    background-color: var(--white);
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.table thead th {
+    font-weight: 600;
+    color: var(--gray-600);
+    /* Couleur un peu plus douce */
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    /* Un peu plus petit pour l'élégance */
+    letter-spacing: 0.05em;
+    padding: var(--spacing-md);
+    border-bottom: 2px solid var(--gray-100);
+    background-color: var(--gray-50);
+    /* Fond très léger pour l'entête */
+}
+
+.table tbody td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-800);
+}
+
+.table tbody tr {
+    transition: all var(--transition-fast);
+}
+
+.table tbody tr:hover {
+    background-color: var(--gray-50);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================
+   BADGES - Discrets
+   ============================================ */
+
+.badge {
+    padding: 0.35em 0.65em;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary) !important;
+    color: var(--white);
+}
+
+.badge.bg-success {
+    background-color: var(--success) !important;
+    color: var(--white);
+}
+
+.badge.bg-warning {
+    background-color: var(--warning) !important;
+    color: var(--white);
+}
+
+.badge.bg-danger {
+    background-color: var(--danger) !important;
+    color: var(--white);
+}
+
+.badge.bg-info {
+    background-color: var(--accent) !important;
+    color: var(--white);
+}
+
+.badge.bg-secondary {
+    background-color: var(--gray-500) !important;
+    color: var(--white);
+}
+
+/* ============================================
+   ALERTS - Subtiles
+   ============================================ */
+
+.alert {
+    border-radius: 6px;
+    border: 1px solid;
+    border-left-width: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.alert-primary {
+    background-color: var(--white);
+    border-color: var(--primary);
+    border-left-color: var(--primary);
+    color: var(--primary);
+}
+
+.alert-success {
+    background-color: var(--white);
+    border-color: var(--success);
+    border-left-color: var(--success);
+    color: var(--success);
+}
+
+.alert-warning {
+    background-color: var(--white);
+    border-color: var(--warning);
+    border-left-color: var(--warning);
+    color: #D68910;
+}
+
+.alert-danger {
+    background-color: var(--white);
+    border-color: var(--danger);
+    border-left-color: var(--danger);
+    color: var(--danger);
+}
+
+.alert-info {
+    background-color: var(--white);
+    border-color: var(--accent);
+    border-left-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ============================================
+   WORKFLOW - Visuel sobre
+   ============================================ */
+
+.workflow-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xl) 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.workflow-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-width: 120px;
+}
+
+.workflow-step-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+    transition: all var(--transition-base);
+    border: 2px solid;
+    background-color: var(--white);
+}
+
+.workflow-step.active .workflow-step-icon {
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(44, 62, 80, 0.1);
+}
+
+.workflow-step.completed .workflow-step-icon {
+    background-color: var(--success);
+    color: var(--white);
+    border-color: var(--success);
+}
+
+.workflow-step.pending .workflow-step-icon {
+    background-color: var(--white);
+    color: var(--gray-400);
+    border-color: var(--gray-300);
+}
+
+.workflow-step-label {
+    font-size: 0.8125rem;
+    text-align: center;
+    font-weight: 500;
+    color: var(--gray-700);
+    max-width: 100px;
+}
+
+.workflow-step.active .workflow-step-label {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.workflow-step.completed .workflow-step-label {
+    color: var(--success);
+}
+
+.workflow-step.pending .workflow-step-label {
+    color: var(--gray-500);
+}
+
+.workflow-step-connector {
+    position: absolute;
+    top: 24px;
+    left: calc(50% + 24px);
+    width: calc(100% - 48px);
+    height: 2px;
+    background-color: var(--gray-300);
+    z-index: -1;
+}
+
+.workflow-step.completed+.workflow-step .workflow-step-connector,
+.workflow-step.active+.workflow-step .workflow-step-connector {
+    background-color: var(--success);
+}
+
+/* ============================================
+   TIMELINE - Minimaliste
+   ============================================ */
+
+.timeline-mini {
+    position: relative;
+    padding-left: var(--spacing-xl);
+}
+
+.timeline-item-mini {
+    position: relative;
+    padding-bottom: var(--spacing-lg);
+}
+
+.timeline-item-mini:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 20px;
+    width: 1px;
+    height: calc(100% - 10px);
+    background-color: var(--gray-200);
+}
+
+.timeline-marker-mini {
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: 2px solid var(--primary);
+}
+
+.timeline-content-mini {
+    padding-left: var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--gray-700);
+}
+
+/* ============================================
+   MODALS - Épurées
+   ============================================ */
+
+.modal-header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: var(--spacing-lg);
+}
+
+.modal-title {
+    font-weight: 600;
+    color: var(--gray-900);
+    font-size: 1.25rem;
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+}
+
+.modal-footer {
+    background-color: var(--white);
+    border-top: 1px solid var(--gray-200);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+/* ============================================
+   RECHERCHE - Sobre
+   ============================================ */
+
+.search-box input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+}
+
+.search-results {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+    border-radius: 8px;
+    margin-top: var(--spacing-xs);
+}
+
+.search-results .result-item {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--gray-100);
+    transition: all var(--transition-fast);
+}
+
+.search-results .result-item:hover,
+.search-results .result-item.active {
+    background-color: var(--gray-50);
+}
+
+.search-results .result-item:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   LIST GROUPS - Minimalistes
+   ============================================ */
+
+.list-group-item {
+    border: 1px solid var(--gray-200);
+    background-color: var(--white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    transition: all var(--transition-fast);
+}
+
+.list-group-item:hover {
+    background-color: var(--gray-50);
+    border-color: var(--gray-300);
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.list-group-item:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* ============================================
+   DOCUMENTS - Discrets
+   ============================================ */
+
+.document-stats {
+    background-color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+}
+
+/* ============================================
+   UTILITAIRES
+   ============================================ */
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-secondary {
+    color: var(--accent) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--accent) !important;
+}
+
+.bg-light {
+    background-color: var(--gray-50) !important;
+}
+
+.text-muted {
+    color: var(--gray-500) !important;
+}
+
+/* ============================================
+   TOAST NOTIFICATIONS
+   ============================================ */
+
+.toast-container {
+    z-index: 9999;
+}
+
+.toast {
+    min-width: 300px;
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+}
+
+.toast-header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .workflow-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .workflow-step {
+        width: 100%;
+        flex-direction: row;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .workflow-step-icon {
+        margin-right: var(--spacing-md);
+        margin-bottom: 0;
+    }
+
+    .workflow-step-label {
+        text-align: left;
+        max-width: none;
+    }
+
+    .workflow-step-connector {
+        display: none;
+    }
+
+    .timeline-mini {
+        padding-left: var(--spacing-lg);
+    }
+
+    .card-body {
+        padding: var(--spacing-md);
+    }
+
+    .navbar-nav {
+        margin-top: var(--spacing-md);
+    }
+
+    .nav-link {
+        margin: var(--spacing-xs) 0;
+    }
+}
+
+/* ============================================
+   ANIMATIONS FLUIDES
+   ============================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn var(--transition-base) ease-out;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus visible pour accessibilité */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}

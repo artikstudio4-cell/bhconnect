@@ -1,0 +1,92 @@
+# BH CONNECT - Apache Configuration for InfinityFree
+# Sécurité, Timeouts et Réécriture d'URL
+
+# ============================================
+# TIMEOUTS (Important pour éviter ERR_FAILED)
+# ============================================
+<IfModule mod_fcgid.c>
+  FcgidConnectTimeout 30
+  FcgidIOTimeout 120
+</IfModule>
+
+<IfModule mod_php.c>
+  php_value max_execution_time 120
+  php_value max_input_time 60
+</IfModule>
+
+# ============================================
+# PERFORMANCE & COMPRESSION
+# ============================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+</IfModule>
+
+# ============================================
+# RÉÉCRITURE D'URL
+# ============================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Empêcher l'accès direct à certains fichiers sensibles
+    RewriteRule "^\.env" - [F]
+    RewriteRule "^\.git" - [F]
+    RewriteRule "^logs/" - [F]
+    RewriteRule "^config/database\.php" - [F]
+    RewriteRule "^test_.*\.php" - [F]
+    RewriteRule "^debug_.*\.php" - [F]
+
+    # Si le fichier ou dossier existe, le servir directement
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Rediriger vers index.php pour le routage
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
+
+# ============================================
+# SÉCURITÉ
+# ============================================
+<FilesMatch "\.(env|log|sql|conf)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquer les fichiers de test
+<FilesMatch "^(debug_|test_)" >
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Empêcher le listing des dossiers
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# ============================================
+# EN-TÊTES SÉCURITÉ
+# ============================================
+<IfModule mod_headers.c>
+    # X-Frame-Options
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # X-Content-Type-Options
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # X-XSS-Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer-Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+

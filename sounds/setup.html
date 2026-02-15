@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration des sons de notification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .card { border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .btn-large { padding: 15px 30px; font-size: 1.1rem; }
+        .status { padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0"><i class="bi bi-volume-up"></i> Configuration des sons de notification</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Le système de notifications utilise des sons pour alerter l'utilisateur. Cette page vous aide à configurer les fichiers audio.</p>
+
+                        <!-- Statut du fichier -->
+                        <div class="mb-4">
+                            <h5>📊 Statut du fichier audio</h5>
+                            <div id="fileStatus" class="status info">
+                                <i class="bi bi-hourglass-split"></i> Vérification en cours...
+                            </div>
+                        </div>
+
+                        <!-- Options -->
+                        <div class="mb-4">
+                            <h5>🎵 Options de configuration</h5>
+                            
+                            <div class="mb-3">
+                                <h6>Option 1: Générer le son avec FFmpeg</h6>
+                                <p class="text-muted">Génère automatiquement un fichier notification.mp3 (nécessite FFmpeg)</p>
+                                <button class="btn btn-primary btn-large" onclick="generateSound()">
+                                    <i class="bi bi-gear"></i> Générer le son
+                                </button>
+                                <div id="generateOutput" class="mt-3"></div>
+                            </div>
+
+                            <hr>
+
+                            <div class="mb-3">
+                                <h6>Option 2: Télécharger un son gratuit</h6>
+                                <p class="text-muted">Utilise un son gratuit depuis une source en ligne</p>
+                                <button class="btn btn-success btn-large" onclick="downloadSound()">
+                                    <i class="bi bi-download"></i> Télécharger un son
+                                </button>
+                                <div id="downloadOutput" class="mt-3"></div>
+                            </div>
+
+                            <hr>
+
+                            <div class="mb-3">
+                                <h6>Option 3: Uploader un fichier personnalisé</h6>
+                                <p class="text-muted">Utilisez votre propre fichier MP3</p>
+                                <input type="file" id="audioFile" accept="audio/mp3,audio/mpeg" class="form-control mb-2">
+                                <button class="btn btn-info btn-large" onclick="uploadSound()">
+                                    <i class="bi bi-cloud-upload"></i> Uploader le fichier
+                                </button>
+                                <div id="uploadOutput" class="mt-3"></div>
+                            </div>
+                        </div>
+
+                        <!-- Test du son -->
+                        <div class="mb-4">
+                            <h5>🔊 Test du son</h5>
+                            <button class="btn btn-warning btn-large" onclick="testSound()">
+                                <i class="bi bi-play-fill"></i> Écouter le son de notification
+                            </button>
+                        </div>
+
+                        <!-- Informations -->
+                        <div class="alert alert-info">
+                            <h6 class="alert-heading"><i class="bi bi-info-circle"></i> Informations</h6>
+                            <ul class="mb-0">
+                                <li>Le fichier doit être nommé <code>notification.mp3</code></li>
+                                <li>Format recommandé: MP3, durée < 2 secondes</li>
+                                <li>Emplacement: <code>sounds/notification.mp3</code></li>
+                                <li>Les sons peuvent être activés/désactivés par l'utilisateur</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="javascript:history.back()" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Retour
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Vérifier le statut du fichier au chargement
+        window.addEventListener('load', checkFileStatus);
+
+        function checkFileStatus() {
+            fetch('check_sound.php')
+                .then(r => r.json())
+                .then(data => {
+                    const statusDiv = document.getElementById('fileStatus');
+                    if (data.exists) {
+                        statusDiv.className = 'status success';
+                        statusDiv.innerHTML = `<i class="bi bi-check-circle"></i> Fichier found: ${data.filename} (${data.size})`;
+                    } else {
+                        statusDiv.className = 'status error';
+                        statusDiv.innerHTML = `<i class="bi bi-exclamation-circle"></i> Fichier not found. Veuillez en configurer un.`;
+                    }
+                })
+                .catch(err => {
+                    const statusDiv = document.getElementById('fileStatus');
+                    statusDiv.className = 'status error';
+                    statusDiv.innerHTML = `<i class="bi bi-exclamation-circle"></i> Erreur de vérification`;
+                });
+        }
+
+        function generateSound() {
+            const output = document.getElementById('generateOutput');
+            output.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Génération...</span></div> Génération en cours...';
+            
+            fetch('generate_sound_api.php', {method: 'POST'})
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        output.className = 'status success';
+                        output.innerHTML = `<i class="bi bi-check-circle"></i> ${data.message}`;
+                        setTimeout(checkFileStatus, 1000);
+                    } else {
+                        output.className = 'status error';
+                        output.innerHTML = `<i class="bi bi-exclamation-circle"></i> ${data.message}`;
+                    }
+                })
+                .catch(err => {
+                    output.className = 'status error';
+                    output.innerHTML = '<i class="bi bi-exclamation-circle"></i> Erreur: ' + err.message;
+                });
+        }
+
+        function downloadSound() {
+            const output = document.getElementById('downloadOutput');
+            output.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Téléchargement...</span></div> Téléchargement en cours...';
+            
+            fetch('download_sound.php', {method: 'POST'})
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        output.className = 'status success';
+                        output.innerHTML = `<i class="bi bi-check-circle"></i> ${data.message}`;
+                        setTimeout(checkFileStatus, 1000);
+                    } else {
+                        output.className = 'status error';
+                        output.innerHTML = `<i class="bi bi-exclamation-circle"></i> ${data.message}`;
+                    }
+                })
+                .catch(err => {
+                    output.className = 'status error';
+                    output.innerHTML = '<i class="bi bi-exclamation-circle"></i> Erreur: ' + err.message;
+                });
+        }
+
+        function uploadSound() {
+            const fileInput = document.getElementById('audioFile');
+            const output = document.getElementById('uploadOutput');
+            
+            if (!fileInput.files.length) {
+                output.className = 'status error';
+                output.innerHTML = '<i class="bi bi-exclamation-circle"></i> Veuillez sélectionner un fichier';
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('audio', fileInput.files[0]);
+            
+            output.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Upload...</span></div> Upload en cours...';
+            
+            fetch('upload_sound.php', {method: 'POST', body: formData})
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        output.className = 'status success';
+                        output.innerHTML = `<i class="bi bi-check-circle"></i> ${data.message}`;
+                        fileInput.value = '';
+                        setTimeout(checkFileStatus, 1000);
+                    } else {
+                        output.className = 'status error';
+                        output.innerHTML = `<i class="bi bi-exclamation-circle"></i> ${data.message}`;
+                    }
+                })
+                .catch(err => {
+                    output.className = 'status error';
+                    output.innerHTML = '<i class="bi bi-exclamation-circle"></i> Erreur: ' + err.message;
+                });
+        }
+
+        function testSound() {
+            const audio = new Audio('notification.mp3');
+            audio.volume = 0.5;
+            audio.play().catch(err => {
+                alert('Impossible de lire le son: ' + err.message);
+            });
+        }
+    </script>
+</body>
+</html>

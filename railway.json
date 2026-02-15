@@ -1,0 +1,22 @@
+{
+  "buildCommand": "composer install --no-dev 2>/dev/null || true",
+  "startCommand": "php -S 0.0.0.0:$PORT",
+  "variables": {
+    "ENVIRONMENT": {
+      "description": "Environnement (production/development)",
+      "value": "production"
+    },
+    "APP_DEBUG": {
+      "description": "Activer le debug mode",
+      "value": "false"
+    },
+    "APP_TIMEZONE": {
+      "description": "Fuseau horaire",
+      "value": "Africa/Douala"
+    },
+    "SESSION_TIMEOUT": {
+      "description": "Timeout de session en secondes",
+      "value": "3600"
+    }
+  }
+}
