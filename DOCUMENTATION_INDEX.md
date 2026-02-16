@@ -48,6 +48,9 @@ Then → [README.md](./README.md) (Features)
 |----------|----------|---------|------|
 | [DEPLOYMENT_INSTRUCTIONS.md](./DEPLOYMENT_INSTRUCTIONS.md) | DevOps, Developers | Step-by-step deployment walkthrough | 30 min |
 | [DEPLOYMENT_RAILWAY.md](./DEPLOYMENT_RAILWAY.md) | DevOps | Detailed Railway deployment guide | 45 min |
+| [DEPLOYMENT_NEXT_STEPS.md](./DEPLOYMENT_NEXT_STEPS.md) | DevOps | Post-configuration Railway guide with testing | 20 min |
+| [INFINITYFREE_RAILWAY_CONFIG.md](./INFINITYFREE_RAILWAY_CONFIG.md) | DevOps | InfinityFree remote DB connection guide | 30 min |
+| [RAILWAY_DATABASE_IMPORT.md](./RAILWAY_DATABASE_IMPORT.md) | DevOps | Database import guide for Railway | 20 min |
 | [QUICKSTART.md](./QUICKSTART.md) | Developers | Local development setup | 20 min |
 
 ### General Information
