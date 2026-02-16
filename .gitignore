@@ -41,6 +41,7 @@ sessions/*
 # Temporary files
 temp/
 tmp/
+
 # Test & Debug Files (À supprimer avant déploiement)
 debug_*.php
 test_*.php
@@ -48,6 +49,9 @@ setup-infinity-free.php
 setup_invoice_db.php
 setup_quiz_db.php
 diagnostic_complet.php
+
+# Exception: Keep deployment test file
+!test_infinityfree_connection.php
 health-check.php
 
 # Documents de déploiement InfinityFree (spécifique)
